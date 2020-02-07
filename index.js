@@ -2,8 +2,7 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 
 try {
-  const labels = core.getInput("labels");
-  const debug = core.getInput("debug");
+  const labels = core.getInput("labels").split(",");
   const issue = github.context.payload.issue;
   const action = github.context.payload.acction;
 
@@ -13,11 +12,8 @@ try {
     core.setOutput("match", match);
   }
 
-  console.log(debug, 'debug');
-  if (debug) {
-    const payload = JSON.stringify(github.context.payload, undefined, 2)
-    console.log(`The event payload: ${payload}`);
-  }
+  // const payload = JSON.stringify(github.context.payload, undefined, 2)
+  // console.log(`The event payload: ${payload}`);
 
   if (!issue) return finish(false);
   if (!Array.isArray(issue.labels)) return finish(false);
