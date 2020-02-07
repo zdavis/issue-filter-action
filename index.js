@@ -20,8 +20,8 @@ try {
 
   if (!issue) return finish(false);
   if (!Array.isArray(issue.labels)) return finish(false);
-  return finish(issues.labels.some((label) => labels.includes(label.name)));
-  
+  return finish(issue.labels.some((label) => labels.includes(label.name)));
+
 } catch (error) {
   core.setFailed(error.message);
 }
