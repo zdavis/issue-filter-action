@@ -4,6 +4,7 @@ const github = require('@actions/github');
 try {
   const labels = core.getInput("labels");
   const debug = core.getInput("debug");
+  console.log(debug, 'debug');
   const issue = github.context.payload.issue;
   const action = github.context.payload.acction;
 
