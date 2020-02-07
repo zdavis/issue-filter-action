@@ -1,13 +1,13 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Filter issue by label'
+description: 'Checks if an issue has a label'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  labels:  # labels we need to proceed
+    description: 'An array of labels needed to proceed'
     required: true
-    default: 'World'
+    default: []
 outputs:
-  time: # id of output
-    description: 'The time we we greeted you'
+  match: # was there a match?
+    description: 'True if one of the labels matched. False if not.'
 runs:
   using: 'node12'
   main: 'index.js'
