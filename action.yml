@@ -4,7 +4,7 @@ inputs:
   labels:  # labels we need to proceed
     description: 'An array of labels needed to proceed'
     required: true
-    default: []
+    default: ""
 outputs:
   match: # was there a match?
     description: 'True if one of the labels matched. False if not.'
