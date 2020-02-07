@@ -4,7 +4,6 @@ const github = require('@actions/github');
 try {
   const labels = core.getInput("labels");
   const debug = core.getInput("debug");
-  console.log(debug, 'debug');
   const issue = github.context.payload.issue;
   const action = github.context.payload.acction;
 
@@ -14,6 +13,7 @@ try {
     core.setOutput("match", match);
   }
 
+  console.log(debug, 'debug');
   if (debug) {
     const payload = JSON.stringify(github.context.payload, undefined, 2)
     console.log(`The event payload: ${payload}`);
