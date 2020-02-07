@@ -5,6 +5,10 @@ inputs:
     description: 'An array of labels needed to proceed'
     required: true
     default: ""
+  type:  # match type
+    description: 'can be "any" or "all"'
+    required: true
+    default: "any"
 outputs:
   match: # was there a match?
     description: 'True if one of the labels matched. False if not.'

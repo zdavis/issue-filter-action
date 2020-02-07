@@ -2,12 +2,14 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 
 try {
-  const labels = core.getInput("labels").split(",");
+  const requiredLabels = core.getInput("labels").split(",");
+  const type = core.getInput("type");
   const issue = github.context.payload.issue;
   const action = github.context.payload.acction;
 
   function finish(match) {
     const msg = match ? "Issue matches" : "Issue does not match";
+
     console.log(msg);
     core.setOutput("match", match);
   }
@@ -17,7 +19,16 @@ try {
 
   if (!issue) return finish(false);
   if (!Array.isArray(issue.labels)) return finish(false);
-  return finish(issue.labels.some((label) => labels.includes(label.name)));
+
+  const issueLabels = issue.labels.map((label) => label.name);
+
+  let result = false;
+  if (type === "any") {
+    result = issueLabels.some((label) => requiredLabels.includes(label));
+  } else {
+    result = requiredLabels.every((label) => issueLabels.includes(label));
+  }
+  return finish(result);
 
 } catch (error) {
   core.setFailed(error.message);
